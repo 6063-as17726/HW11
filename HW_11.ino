@@ -11,8 +11,7 @@ Clicky pClick;
 void setup() {
   // put your setup code here, to run once:
   pinMode(7, OUTPUT); 
-  pinMode(8, OUTPUT); 
-  pinMode(4, INPUT); 
+  pinMode(8, OUTPUT);  
   pinMode(2, INPUT); 
   Serial.begin(9600); 
   pClick.setup(4);
@@ -23,7 +22,7 @@ void loop() {
     bool i0 = pClick.wasClicked();
     int i1 = digitalRead(2); 
     int i2 = analogRead(A6); 
-    int i3 = digitalRead(4); 
+    int i3 = digitalRead(3); 
 
   if(pState == pRight && i0 == 1) {
     pState = pRight; 
