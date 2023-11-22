@@ -7,7 +7,6 @@ int pState = pRight;
 
 Clicky pClick;
 
-
 void setup() {
   // put your setup code here, to run once:
   pinMode(7, OUTPUT); 
@@ -24,38 +23,48 @@ void loop() {
     int i2 = analogRead(A6); 
     int i3 = digitalRead(3); 
 
-  if(pState == pRight && i0 == 1) {
+  if(pState == pRight) {
+  if (i0==1) {
     pState = pRight; 
   } else {
     pState = pWrong; 
   }
-  
-  if(pState == pRight && i1 == 1) {
-    pState = pRight; 
-  } else {
-    pState = pWrong; 
-  }
-
-  if (pState == pRight && i2 > 300) { 
-    pState = pRight;  
-  } else {
-    pState = pWrong; 
-  }
-
-  if(pState == pRight && i3 == 1) {
-    pState = pRight; 
-  } else {
-    pState = pWrong; 
-  }
-
-  if (pState == pRight) {
-    digitalWrite(7, HIGH); 
-  } else {
-    digitalWrite (8, HIGH); 
-  }
-
-  Serial.println(String(pState));
-
-  delay(100); 
-
 }
+
+if(pState == pRight) {
+  if (i1==1) {
+    pState = pRight; 
+  } else {
+    pState = pWrong; 
+  }
+}
+
+if(pState == pRight) {
+  if (i2==1) {
+    pState = pRight; 
+  } else {
+    pState = pWrong; 
+  }
+}
+
+if(pState == pRight) {
+  if (i3==1) {
+    pState = pRight; 
+  } else {
+    pState = pWrong; 
+  }
+}
+
+if (pState == pRight) {
+  digitalWrite(7, HIGH); 
+} else {
+  digitalWrite (8, HIGH); 
+}
+
+Serial.println(String(pState));
+delay(100); 
+}
+
+
+
+
