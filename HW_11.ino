@@ -1,9 +1,9 @@
 #include "Clicky.h"
 
 // int pCount = 0; 
-int pRight = 1; 
-int pWrong = 0; 
-int pState = pRight; 
+//int pRight = 1; 
+//int pWrong = 0; 
+int pNum = 0; 
 
 Clicky pClick;
 
@@ -11,7 +11,8 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(7, OUTPUT); 
   pinMode(8, OUTPUT);  
-  pinMode(2, INPUT); 
+  pinMode(2, INPUT);
+  pinMode(3, INPUT); 
   Serial.begin(9600); 
   pClick.setup(4);
 }
@@ -23,46 +24,59 @@ void loop() {
     int i2 = analogRead(A6); 
     int i3 = digitalRead(3); 
 
-  if(pState == pRight) {
-  if (i0==1) {
-    pState = pRight; 
-  } else {
-    pState = pWrong; 
+    if (pNum == 0) {
+      if (i0 == 1) {
+        pNum++; 
+      }
+    }
+
+  else if(pNum == 1) {
+    if(i0 == 1) {
+      if(i1 == 1 && i2 < 1000 && i3 == 0) {
+        pNum++; 
+      }
+      else {
+        pNum == 100; 
+      }
+    }
   }
-}
 
-if(pState == pRight) {
-  if (i1==1) {
-    pState = pRight; 
-  } else {
-    pState = pWrong; 
+  else if(pNum == 2) {
+    if(i0 == 1) {
+      if(i1 == 1 && i2 > 1000 && i3 == 0) {
+        pNum++; 
+      }
+      else {
+        pNum == 100; 
+      }
+    }
   }
-}
 
-if(pState == pRight) {
-  if (i2==1) {
-    pState = pRight; 
-  } else {
-    pState = pWrong; 
+  else if(pNum == 3) {
+    if(i0 == 1) {
+      if(i1 == 1 && i2 > 1000 && i3 == 1) {
+        pNum++; 
+      }
+      else {
+        pNum == 100; 
+      }
+    }
   }
-}
 
-if(pState == pRight) {
-  if (i3==1) {
-    pState = pRight; 
-  } else {
-    pState = pWrong; 
-  }
+if (pNum == 4) {
+digitalWrite(7, HIGH); 
+delay(500); 
+digitalWrite(7, LOW); 
+pNum = 0; 
+} 
+else if(pNum == 100) {
+  digitalWrite(8, HIGH); 
+  delay(500); 
+  digitalWrite(8, LOW); 
+  pNum = 0; 
 }
-
-if (pState == pRight) {
-  digitalWrite(7, HIGH); 
-} else {
-  digitalWrite (8, HIGH); 
-}
-
-Serial.println(String(pState));
-delay(100); 
+Serial.println(String(pNum) + " " + i0 + " " + i1 + " " + i2 + " " + i3);
+delay(5); 
 }
 
 
